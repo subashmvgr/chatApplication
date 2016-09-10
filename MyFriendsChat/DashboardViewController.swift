@@ -13,15 +13,35 @@ class DashboardViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: #selector(handleLogout))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: #selector(handleLogout))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "MSG", style: .Plain, target: self, action: #selector(hanldeNewMessage))
         
+        securityCheck()
+    }
+    
+    func securityCheck() {
         if FIRAuth.auth()?.currentUser?.uid == nil {
             performSelector(#selector(handleLogout), withObject: nil, afterDelay: 0)
+        } else {
+            if let uid = FIRAuth.auth()?.currentUser?.uid {
+            FIRDatabase.database().reference().child("users").child(uid).observeEventType(.Value, withBlock: { (snapshot) in
+                if let dict = snapshot.value as? [String: AnyObject], fName = dict["firstName"] as? String, lName = dict["lastName"] as? String {
+                    self.navigationItem.title = fName + " " + lName
+                }
+                }, withCancelBlock: nil)
+                
+            }
+            
         }
-        
-        
     }
 
+    
+    func hanldeNewMessage() {
+        let newMessageVC = NewMessageTableTableViewController()
+        let navController = UINavigationController(rootViewController: newMessageVC)
+        presentViewController(navController, animated: true, completion: nil)
+    }
+    
     func handleLogout() {
         
         do {

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A07AE77A1D84711C000CFAAC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A07AE7791D84711C000CFAAC /* GoogleService-Info.plist */; };
+		A07AE77C1D84B769000CFAAC /* NewMessageTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AE77B1D84B769000CFAAC /* NewMessageTableTableViewController.swift */; };
+		A07AE77E1D84BAA8000CFAAC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AE77D1D84BAA8000CFAAC /* User.swift */; };
 		A08A75D31D79482800EBDBD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08A75D21D79482800EBDBD0 /* AppDelegate.swift */; };
 		A08A75D51D79482800EBDBD0 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08A75D41D79482800EBDBD0 /* DashboardViewController.swift */; };
 		A08A75D81D79482800EBDBD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A08A75D61D79482800EBDBD0 /* Main.storyboard */; };
@@ -21,6 +23,8 @@
 		59A2C19BE4D251B73C3F8BD4 /* Pods_MyFriendsChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFriendsChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61908A9EA1C8A14FCF3EE47A /* Pods-MyFriendsChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFriendsChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFriendsChat/Pods-MyFriendsChat.release.xcconfig"; sourceTree = "<group>"; };
 		A07AE7791D84711C000CFAAC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A07AE77B1D84B769000CFAAC /* NewMessageTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageTableTableViewController.swift; sourceTree = "<group>"; };
+		A07AE77D1D84BAA8000CFAAC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A08A75CF1D79482800EBDBD0 /* MyFriendsChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFriendsChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08A75D21D79482800EBDBD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A08A75D41D79482800EBDBD0 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +56,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A07AE77F1D84BAB0000CFAAC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A07AE77D1D84BAA8000CFAAC /* User.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		A08A75C61D79482800EBDBD0 = {
 			isa = PBXGroup;
 			children = (
@@ -73,9 +85,9 @@
 		A08A75D11D79482800EBDBD0 /* MyFriendsChat */ = {
 			isa = PBXGroup;
 			children = (
+				A07AE77F1D84BAB0000CFAAC /* Model */,
 				A08A75E41D794C1300EBDBD0 /* Controllers */,
 				A08A75D21D79482800EBDBD0 /* AppDelegate.swift */,
-				A08A75D41D79482800EBDBD0 /* DashboardViewController.swift */,
 				A08A75D61D79482800EBDBD0 /* Main.storyboard */,
 				A08A75D91D79482800EBDBD0 /* Assets.xcassets */,
 				A08A75DB1D79482800EBDBD0 /* LaunchScreen.storyboard */,
@@ -89,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				A08A75E51D794C2D00EBDBD0 /* LoginViewController.swift */,
+				A07AE77B1D84B769000CFAAC /* NewMessageTableTableViewController.swift */,
+				A08A75D41D79482800EBDBD0 /* DashboardViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -226,7 +240,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A08A75E61D794C2D00EBDBD0 /* LoginViewController.swift in Sources */,
+				A07AE77C1D84B769000CFAAC /* NewMessageTableTableViewController.swift in Sources */,
 				A08A75D51D79482800EBDBD0 /* DashboardViewController.swift in Sources */,
+				A07AE77E1D84BAA8000CFAAC /* User.swift in Sources */,
 				A08A75D31D79482800EBDBD0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
