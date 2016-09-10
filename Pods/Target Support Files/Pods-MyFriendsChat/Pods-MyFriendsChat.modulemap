@@ -1,0 +1,6 @@
+framework module Pods_MyFriendsChat {
+  umbrella header "Pods-MyFriendsChat-umbrella.h"
+
+  export *
+  module * { export * }
+}

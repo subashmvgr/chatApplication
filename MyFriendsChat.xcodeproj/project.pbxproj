@@ -1,0 +1,389 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A07AE77A1D84711C000CFAAC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A07AE7791D84711C000CFAAC /* GoogleService-Info.plist */; };
+		A08A75D31D79482800EBDBD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08A75D21D79482800EBDBD0 /* AppDelegate.swift */; };
+		A08A75D51D79482800EBDBD0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08A75D41D79482800EBDBD0 /* ViewController.swift */; };
+		A08A75D81D79482800EBDBD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A08A75D61D79482800EBDBD0 /* Main.storyboard */; };
+		A08A75DA1D79482800EBDBD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A08A75D91D79482800EBDBD0 /* Assets.xcassets */; };
+		A08A75DD1D79482800EBDBD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A08A75DB1D79482800EBDBD0 /* LaunchScreen.storyboard */; };
+		A08A75E61D794C2D00EBDBD0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08A75E51D794C2D00EBDBD0 /* LoginViewController.swift */; };
+		B2E871769D291812A0C8BFA2 /* Pods_MyFriendsChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A2C19BE4D251B73C3F8BD4 /* Pods_MyFriendsChat.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		59A2C19BE4D251B73C3F8BD4 /* Pods_MyFriendsChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFriendsChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		61908A9EA1C8A14FCF3EE47A /* Pods-MyFriendsChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFriendsChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFriendsChat/Pods-MyFriendsChat.release.xcconfig"; sourceTree = "<group>"; };
+		A07AE7791D84711C000CFAAC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A08A75CF1D79482800EBDBD0 /* MyFriendsChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFriendsChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08A75D21D79482800EBDBD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A08A75D41D79482800EBDBD0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A08A75D71D79482800EBDBD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A08A75D91D79482800EBDBD0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A08A75DC1D79482800EBDBD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A08A75DE1D79482800EBDBD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A08A75E51D794C2D00EBDBD0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		CBDAA6DF2556D5C27C61F85F /* Pods-MyFriendsChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFriendsChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFriendsChat/Pods-MyFriendsChat.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A08A75CC1D79482800EBDBD0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2E871769D291812A0C8BFA2 /* Pods_MyFriendsChat.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		72B5C67A23142A3BB7FA0B00 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				59A2C19BE4D251B73C3F8BD4 /* Pods_MyFriendsChat.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A08A75C61D79482800EBDBD0 = {
+			isa = PBXGroup;
+			children = (
+				A08A75D11D79482800EBDBD0 /* MyFriendsChat */,
+				A08A75D01D79482800EBDBD0 /* Products */,
+				A74AD348B734280042A916E2 /* Pods */,
+				72B5C67A23142A3BB7FA0B00 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A08A75D01D79482800EBDBD0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A08A75CF1D79482800EBDBD0 /* MyFriendsChat.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A08A75D11D79482800EBDBD0 /* MyFriendsChat */ = {
+			isa = PBXGroup;
+			children = (
+				A08A75E41D794C1300EBDBD0 /* Controllers */,
+				A08A75D21D79482800EBDBD0 /* AppDelegate.swift */,
+				A08A75D41D79482800EBDBD0 /* ViewController.swift */,
+				A08A75D61D79482800EBDBD0 /* Main.storyboard */,
+				A08A75D91D79482800EBDBD0 /* Assets.xcassets */,
+				A08A75DB1D79482800EBDBD0 /* LaunchScreen.storyboard */,
+				A08A75DE1D79482800EBDBD0 /* Info.plist */,
+				A07AE7791D84711C000CFAAC /* GoogleService-Info.plist */,
+			);
+			path = MyFriendsChat;
+			sourceTree = "<group>";
+		};
+		A08A75E41D794C1300EBDBD0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A08A75E51D794C2D00EBDBD0 /* LoginViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A74AD348B734280042A916E2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CBDAA6DF2556D5C27C61F85F /* Pods-MyFriendsChat.debug.xcconfig */,
+				61908A9EA1C8A14FCF3EE47A /* Pods-MyFriendsChat.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A08A75CE1D79482800EBDBD0 /* MyFriendsChat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A08A75E11D79482800EBDBD0 /* Build configuration list for PBXNativeTarget "MyFriendsChat" */;
+			buildPhases = (
+				550567507BD98DF42B8FE635 /* [CP] Check Pods Manifest.lock */,
+				A08A75CB1D79482800EBDBD0 /* Sources */,
+				A08A75CC1D79482800EBDBD0 /* Frameworks */,
+				A08A75CD1D79482800EBDBD0 /* Resources */,
+				41956658BBCE4CB54827A0B9 /* [CP] Embed Pods Frameworks */,
+				CBAC55658CB74A95A27E6442 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyFriendsChat;
+			productName = MyFriendsChat;
+			productReference = A08A75CF1D79482800EBDBD0 /* MyFriendsChat.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A08A75C71D79482800EBDBD0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Subash Dantuluri";
+				TargetAttributes = {
+					A08A75CE1D79482800EBDBD0 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = A08A75CA1D79482800EBDBD0 /* Build configuration list for PBXProject "MyFriendsChat" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A08A75C61D79482800EBDBD0;
+			productRefGroup = A08A75D01D79482800EBDBD0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A08A75CE1D79482800EBDBD0 /* MyFriendsChat */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A08A75CD1D79482800EBDBD0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A08A75DD1D79482800EBDBD0 /* LaunchScreen.storyboard in Resources */,
+				A07AE77A1D84711C000CFAAC /* GoogleService-Info.plist in Resources */,
+				A08A75DA1D79482800EBDBD0 /* Assets.xcassets in Resources */,
+				A08A75D81D79482800EBDBD0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		41956658BBCE4CB54827A0B9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyFriendsChat/Pods-MyFriendsChat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		550567507BD98DF42B8FE635 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CBAC55658CB74A95A27E6442 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyFriendsChat/Pods-MyFriendsChat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A08A75CB1D79482800EBDBD0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A08A75E61D794C2D00EBDBD0 /* LoginViewController.swift in Sources */,
+				A08A75D51D79482800EBDBD0 /* ViewController.swift in Sources */,
+				A08A75D31D79482800EBDBD0 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A08A75D61D79482800EBDBD0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A08A75D71D79482800EBDBD0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A08A75DB1D79482800EBDBD0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A08A75DC1D79482800EBDBD0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A08A75DF1D79482800EBDBD0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A08A75E01D79482800EBDBD0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A08A75E21D79482800EBDBD0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBDAA6DF2556D5C27C61F85F /* Pods-MyFriendsChat.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MyFriendsChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.luckpati.myfriendschat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A08A75E31D79482800EBDBD0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61908A9EA1C8A14FCF3EE47A /* Pods-MyFriendsChat.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MyFriendsChat/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.luckpati.myfriendschat;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A08A75CA1D79482800EBDBD0 /* Build configuration list for PBXProject "MyFriendsChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A08A75DF1D79482800EBDBD0 /* Debug */,
+				A08A75E01D79482800EBDBD0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A08A75E11D79482800EBDBD0 /* Build configuration list for PBXNativeTarget "MyFriendsChat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A08A75E21D79482800EBDBD0 /* Debug */,
+				A08A75E31D79482800EBDBD0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A08A75C71D79482800EBDBD0 /* Project object */;
+}
