@@ -29,9 +29,52 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         btn.layer.cornerRadius = 10
         btn.layer.masksToBounds = true
         
-        btn.addTarget(self, action: #selector(handleSignUp), forControlEvents: .TouchUpInside)
+        btn.addTarget(self, action: #selector(handleLoginSignUp), forControlEvents: .TouchUpInside)
         return btn
     }()
+    
+    func handleLoginSignUp() {
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
+            handleLogin()
+        } else {
+            handleSignUp()
+        }
+    }
+    
+    func handleLogin() {
+        guard let email = emailTextField.text, password = passwordTextField.text where !password.isEmpty && !email.isEmpty  else {
+            
+            
+            let alertController = UIAlertController(title: "Enter email/Password", message: "Please enter valid email and password to login", preferredStyle: .Alert)
+            
+            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                self.passwordTextField.text = ""
+            }
+            
+            alertController.addAction(OKAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
+        }
+        
+        FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user, error) in
+            if error != nil {
+                let alertController = UIAlertController(title: "inavalid email or password", message: "Please enter valid email and password", preferredStyle: .Alert)
+                
+                let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                    self.passwordTextField.text = ""
+                    self.repeatPasswordTextField.text = ""
+                }
+                
+                alertController.addAction(OKAction)
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
+                return
+            }
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+    }
     
     func handleSignUp() {
         guard let email = emailTextField.text, password = passwordTextField.text, firstName = firstNameField.text, lastName = lastNameField.text  where passwordTextField.text == repeatPasswordTextField.text && !password.isEmpty && !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty  else {
@@ -80,11 +123,50 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     print(err)
                     return
                 }
-                print ("saved user succesfully into firebase db")
+                
                 self.dismissViewControllerAnimated(true, completion: nil)
             })
         })
     }
+    
+    lazy var loginRegisterSegmentedControl: UISegmentedControl = {
+        let sc = UISegmentedControl(items: ["Login", "Register"])
+        sc.translatesAutoresizingMaskIntoConstraints = false
+        sc.tintColor = UIColor.whiteColor()
+        sc.selectedSegmentIndex = 1
+        sc.addTarget(self, action: #selector(handleloginRegisterChange), forControlEvents: .ValueChanged)
+        return sc
+    }()
+    
+    func handleloginRegisterChange() {
+        let title = loginRegisterSegmentedControl.titleForSegmentAtIndex(loginRegisterSegmentedControl.selectedSegmentIndex)
+        signUpButton.setTitle(title, forState: .Normal)
+        
+        //change height of inputcontainer
+        containerHeightConstraint?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
+        
+        
+        firstNameHeightConstraint?.active = false
+        emailHeightConstraint?.active = false
+        passwordHeightConstraint?.active = false
+        passwordWidthConstraint?.active = false
+        repeastpasswordWidthConstraint?.active = false
+        
+        firstNameHeightConstraint = firstNameField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
+        emailHeightConstraint = emailTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        passwordHeightConstraint =  passwordTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
+        passwordWidthConstraint = passwordTextField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1 : 1/2, constant: -24)
+        repeastpasswordWidthConstraint = repeatPasswordTextField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/2, constant: -24)
+        passwordDividerView.hidden = loginRegisterSegmentedControl.selectedSegmentIndex == 0
+        
+        
+        repeastpasswordWidthConstraint?.active = true
+        passwordWidthConstraint?.active = true
+        passwordHeightConstraint?.active = true
+        emailHeightConstraint?.active = true
+        firstNameHeightConstraint?.active = true
+    }
+    
     
     var firstNameField: UITextField = {
         let tf = UITextField()
@@ -156,18 +238,28 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
         view.backgroundColor = UIColor(r: 90, g: 90, b: 90)
         
+        view.addSubview(loginRegisterSegmentedControl)
         view.addSubview(containerView)
         view.addSubview(signUpButton)
         
+        setupLoginRegisterSegementedControl()
         setupContainerView()
         setupSignUpButton()
     }
+    
+    var containerHeightConstraint: NSLayoutConstraint?
+    var firstNameHeightConstraint: NSLayoutConstraint?
+    var emailHeightConstraint: NSLayoutConstraint?
+    var passwordHeightConstraint: NSLayoutConstraint?
+    var passwordWidthConstraint: NSLayoutConstraint?
+    var repeastpasswordWidthConstraint: NSLayoutConstraint?
     
     func setupContainerView() {
         containerView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         containerView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: -40).active = true
         containerView.widthAnchor.constraintEqualToAnchor(view.widthAnchor, constant: -24).active = true
-        containerView.heightAnchor.constraintEqualToConstant(180).active = true
+        containerHeightConstraint = containerView.heightAnchor.constraintEqualToConstant(150)
+        containerHeightConstraint?.active = true
         
         containerView.addSubview(firstNameField)
         containerView.addSubview(lastNameField)
@@ -182,12 +274,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         firstNameField.leftAnchor.constraintEqualToAnchor(containerView.leftAnchor, constant: 12).active = true
         firstNameField.topAnchor.constraintEqualToAnchor(containerView.topAnchor).active = true
         firstNameField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, multiplier: 1/2, constant: -24).active = true
-        firstNameField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: 1/3).active = true
+        firstNameHeightConstraint = firstNameField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: 1/3)
+        firstNameHeightConstraint?.active = true
         
         lastNameField.rightAnchor.constraintEqualToAnchor(containerView.rightAnchor, constant: -12).active = true
         lastNameField.topAnchor.constraintEqualToAnchor(containerView.topAnchor).active = true
         lastNameField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, multiplier: 1/2, constant: -24).active = true
-        lastNameField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: 1/3).active = true
+        lastNameField.heightAnchor.constraintEqualToAnchor(firstNameField.heightAnchor).active = true
         
         nameSeperatorView.centerXAnchor.constraintEqualToAnchor(containerView.centerXAnchor).active = true
         nameSeperatorView.topAnchor.constraintEqualToAnchor(lastNameField.bottomAnchor).active = true
@@ -202,7 +295,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         emailTextField.leftAnchor.constraintEqualToAnchor(containerView.leftAnchor, constant: 12).active = true
         emailTextField.topAnchor.constraintEqualToAnchor(lastNameField.bottomAnchor).active = true
         emailTextField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, constant: -24).active = true
-        emailTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: 1/3).active = true
+        emailHeightConstraint  = emailTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: 1/3)
+        emailHeightConstraint!.active = true
         
         emailSeperatorView.centerXAnchor.constraintEqualToAnchor(containerView.centerXAnchor).active = true
         emailSeperatorView.topAnchor.constraintEqualToAnchor(emailTextField.bottomAnchor).active = true
@@ -211,18 +305,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         passwordTextField.leftAnchor.constraintEqualToAnchor(containerView.leftAnchor, constant: 12).active = true
         passwordTextField.topAnchor.constraintEqualToAnchor(emailTextField.bottomAnchor).active = true
-        passwordTextField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, constant: -24).active = true
-        passwordTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: 1/3).active = true
+        passwordWidthConstraint = passwordTextField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, multiplier: 1/2, constant: -24)
+        passwordWidthConstraint?.active = true
+        passwordHeightConstraint = passwordTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: 1/3)
+        passwordHeightConstraint?.active = true
         
         repeatPasswordTextField.rightAnchor.constraintEqualToAnchor(containerView.rightAnchor, constant: -12).active = true
         repeatPasswordTextField.topAnchor.constraintEqualToAnchor(emailTextField.bottomAnchor).active = true
-        repeatPasswordTextField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, multiplier: 1/2, constant: -24).active = true
-        repeatPasswordTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: 1/3).active = true
+        repeastpasswordWidthConstraint = repeatPasswordTextField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, multiplier: 1/2, constant: -24)
+        repeastpasswordWidthConstraint?.active = true
+        repeatPasswordTextField.heightAnchor.constraintEqualToAnchor(passwordTextField.heightAnchor).active = true
         
         passwordDividerView.centerXAnchor.constraintEqualToAnchor(containerView.centerXAnchor).active = true
         passwordDividerView.topAnchor.constraintEqualToAnchor(repeatPasswordTextField.topAnchor).active = true
         passwordDividerView.widthAnchor.constraintEqualToConstant(1).active = true
         passwordDividerView.heightAnchor.constraintEqualToAnchor(repeatPasswordTextField.heightAnchor).active = true
+    }
+    
+    
+    func setupLoginRegisterSegementedControl() {
+        loginRegisterSegmentedControl.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        loginRegisterSegmentedControl.bottomAnchor.constraintEqualToAnchor(containerView.topAnchor, constant: -12).active = true
+        loginRegisterSegmentedControl.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor).active = true
+        loginRegisterSegmentedControl.heightAnchor.constraintEqualToConstant(50).active = true
     }
     
     func setupSignUpButton() {
