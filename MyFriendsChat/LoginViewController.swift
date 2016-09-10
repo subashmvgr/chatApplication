@@ -81,7 +81,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 print ("saved user succesfully into firebase db")
-                self.signUpButton.setTitle("Registered", forState: .Normal)
+                self.dismissViewControllerAnimated(true, completion: nil)
             })
         })
     }
