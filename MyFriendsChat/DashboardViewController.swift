@@ -23,18 +23,20 @@ class DashboardViewController: UITableViewController {
         if FIRAuth.auth()?.currentUser?.uid == nil {
             performSelector(#selector(handleLogout), withObject: nil, afterDelay: 0)
         } else {
-            if let uid = FIRAuth.auth()?.currentUser?.uid {
-            FIRDatabase.database().reference().child("users").child(uid).observeEventType(.Value, withBlock: { (snapshot) in
-                if let dict = snapshot.value as? [String: AnyObject], fName = dict["firstName"] as? String, lName = dict["lastName"] as? String {
-                    self.navigationItem.title = fName + " " + lName
-                }
-                }, withCancelBlock: nil)
-                
-            }
-            
+            fetchUserAndSetTitle()
         }
     }
 
+    func fetchUserAndSetTitle() {
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
+        
+        FIRDatabase.database().reference().child("users").child(uid).observeEventType(.Value, withBlock: { (snapshot) in
+            if let dict = snapshot.value as? [String: AnyObject], fName = dict["firstName"] as? String, lName = dict["lastName"] as? String {
+                self.navigationItem.title = fName + " " + lName
+            }
+            }, withCancelBlock: nil)
+        
+    }
     
     func hanldeNewMessage() {
         let newMessageVC = NewMessageTableTableViewController()
@@ -51,6 +53,7 @@ class DashboardViewController: UITableViewController {
         }
         
         let LoginVC = LoginViewController()
+        LoginVC.dashBoardVC = self
         presentViewController(LoginVC, animated: true, completion: nil)
     }
 

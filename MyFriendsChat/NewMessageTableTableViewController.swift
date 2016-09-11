@@ -44,21 +44,61 @@ class NewMessageTableTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! UserCell
         let user = users[indexPath.row]
-        cell.textLabel?.text = user.firstName! + " " + user.lastName!
+        if let fName = user.firstName, lName = user.lastName {
+        cell.textLabel?.text = fName + " " + lName
+        }
         cell.detailTextLabel?.text = user.email
+        if let profileImageUrl = user.profileImageUrl {
+          cell.profileImageView.loadImageUsingCache(profileImageUrl)
+        }
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 72
     }
     
 }
 
 class  UserCell: UITableViewCell {
+    
+    let profileImageView: UIImageView = {
+       let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 24
+        imageView.layer.masksToBounds = true
+        return imageView
+        
+    }()
+    
+    
+    override func layoutSubviews() {
+         super.layoutSubviews()
+        if let textLbl = textLabel, detailTextLbl = detailTextLabel {
+        textLbl.frame = CGRectMake(64, textLbl.frame.origin.y - 2 , textLbl.frame.width, textLbl.frame.height)
+        detailTextLbl.frame = CGRectMake(64, detailTextLbl.frame.origin.y + 2, detailTextLbl.frame.width, detailTextLbl.frame.height)
+        }
+       
+    }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)
+        
+        addSubview(profileImageView)
+        
+        
+        //ios 9 constraints
+        profileImageView.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 8).active = true
+        profileImageView.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
+        profileImageView.widthAnchor.constraintEqualToConstant(48).active = true
+        profileImageView.heightAnchor.constraintEqualToConstant(48).active = true
+    
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    
 }

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyFriendsChat/LoginController+handlers.swift"
-            timestampString = "495248348.547799"
+            timestampString = "495270034.364556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "handleLogin()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,29 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyFriendsChat/LoginController+handlers.swift"
-            timestampString = "495248348.547799"
+            filePath = "MyFriendsChat/Extensions.swift"
+            timestampString = "495269311.130854"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "setLoadingScreen()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyFriendsChat/LoginController+handlers.swift"
-            timestampString = "495248348.547799"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "removeLoadingScreen()"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "loadImageUsingCache(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
