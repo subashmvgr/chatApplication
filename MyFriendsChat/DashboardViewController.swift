@@ -12,10 +12,13 @@ import Firebase
 class DashboardViewController: UITableViewController {
 
     var messages = [Message]()
+    var messagesDictionary = [String: Message]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: #selector(handleLogout))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "MSG", style: .Plain, target: self, action: #selector(hanldeNewMessage))
+        tableView.registerClass(UserCell.self, forCellReuseIdentifier: cellId)
         
         securityCheck()
         observeMessages()
@@ -27,7 +30,15 @@ class DashboardViewController: UITableViewController {
             if let dict = snapshot.value as? [String : AnyObject] {
                 let message = Message()
                 message.setValuesForKeysWithDictionary(dict)
-                self.messages.append(message)
+               // self.messages.append(message)
+                
+                if let toId = message.toId {
+                    self.messagesDictionary[toId] = message
+                    self.messages = Array(self.messagesDictionary.values)
+                    self.messages.sortInPlace({ (msg1, msg2) -> Bool in
+                        return msg1.timestamp?.intValue > msg2.timestamp?.intValue
+                    })
+                }
                 
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadData()
@@ -139,10 +150,18 @@ class DashboardViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "cellID")
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! UserCell
         let message = messages[indexPath.row]
-        cell.textLabel?.text = message.toId
-        cell.detailTextLabel?.text = message.text
+        cell.message = message
+        
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 72
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+       // showChatViewForUser()
     }
 }

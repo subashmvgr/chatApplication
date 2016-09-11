@@ -8,10 +8,11 @@
 
 import UIKit
 import Firebase
+let cellId = "CellId"
 
 class NewMessageTableViewController: UITableViewController {
     var users = [User]()
-    let cellId = "CellId"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,43 +74,3 @@ class NewMessageTableViewController: UITableViewController {
     
 }
 
-class  UserCell: UITableViewCell {
-    
-    let profileImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 24
-        imageView.layer.masksToBounds = true
-        return imageView
-        
-    }()
-    
-    
-    override func layoutSubviews() {
-         super.layoutSubviews()
-        if let textLbl = textLabel, detailTextLbl = detailTextLabel {
-        textLbl.frame = CGRectMake(64, textLbl.frame.origin.y - 2 , textLbl.frame.width, textLbl.frame.height)
-        detailTextLbl.frame = CGRectMake(64, detailTextLbl.frame.origin.y + 2, detailTextLbl.frame.width, detailTextLbl.frame.height)
-        }
-       
-    }
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)
-        
-        addSubview(profileImageView)
-        
-        
-        //ios 9 constraints
-        profileImageView.leftAnchor.constraintEqualToAnchor(self.leftAnchor, constant: 8).active = true
-        profileImageView.centerYAnchor.constraintEqualToAnchor(self.centerYAnchor).active = true
-        profileImageView.widthAnchor.constraintEqualToConstant(48).active = true
-        profileImageView.heightAnchor.constraintEqualToConstant(48).active = true
-    
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    
-}
