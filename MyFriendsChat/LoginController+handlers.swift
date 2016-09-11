@@ -131,10 +131,10 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
                 print(err)
                 return
             }
-            
-            if let firsName = values["firstName"] as? String, lastName = values["lastName"] as? String {
-                self.dashBoardVC?.navigationItem.title = firsName + " " + lastName
-            }
+
+            let user = User()
+            user.setValuesForKeysWithDictionary(values)
+            self.dashBoardVC?.setupNavBarFromUser(user)
             self.loadingAlert.dismissViewControllerAnimated(true, completion: nil)
             self.dismissViewControllerAnimated(true, completion: nil)
         })

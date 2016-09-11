@@ -18,13 +18,14 @@ class NewMessageTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .Plain, target: self, action: #selector(handleCancel))
         
         tableView.registerClass(UserCell.self, forCellReuseIdentifier: cellId)
-        fetchUser()
+        fetchUsers()
     }
     
-    func fetchUser() {
+    func fetchUsers() {
         FIRDatabase.database().reference().child("users").observeEventType(.ChildAdded, withBlock: { (snapshot) in
             if let dict = snapshot.value as? [String: AnyObject] {
                 let user = User()
+                user.id = snapshot.key
                 user.setValuesForKeysWithDictionary(dict)
                 self.users.append(user)
                 //this will crash because of background thread, so lets use dispatch_async to fix
@@ -58,6 +59,16 @@ class NewMessageTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 72
+    }
+    
+    
+    var dashVC: DashboardViewController?
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        dismissViewControllerAnimated(true) {
+            let user = self.users[indexPath.row]
+            self.dashVC?.showChatViewForUser(user)
+        }
     }
     
 }
