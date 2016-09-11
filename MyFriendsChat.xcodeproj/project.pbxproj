@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A07AE77A1D84711C000CFAAC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A07AE7791D84711C000CFAAC /* GoogleService-Info.plist */; };
-		A07AE77C1D84B769000CFAAC /* NewMessageTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AE77B1D84B769000CFAAC /* NewMessageTableTableViewController.swift */; };
+		A07AE77C1D84B769000CFAAC /* NewMessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AE77B1D84B769000CFAAC /* NewMessageTableViewController.swift */; };
 		A07AE77E1D84BAA8000CFAAC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AE77D1D84BAA8000CFAAC /* User.swift */; };
 		A07AE7811D84C886000CFAAC /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AE7801D84C886000CFAAC /* LoginController+handlers.swift */; };
 		A07AE7841D852C69000CFAAC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07AE7831D852C69000CFAAC /* Extensions.swift */; };
@@ -25,7 +25,7 @@
 		59A2C19BE4D251B73C3F8BD4 /* Pods_MyFriendsChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFriendsChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61908A9EA1C8A14FCF3EE47A /* Pods-MyFriendsChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFriendsChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFriendsChat/Pods-MyFriendsChat.release.xcconfig"; sourceTree = "<group>"; };
 		A07AE7791D84711C000CFAAC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A07AE77B1D84B769000CFAAC /* NewMessageTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageTableTableViewController.swift; sourceTree = "<group>"; };
+		A07AE77B1D84B769000CFAAC /* NewMessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageTableViewController.swift; sourceTree = "<group>"; };
 		A07AE77D1D84BAA8000CFAAC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A07AE7801D84C886000CFAAC /* LoginController+handlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
 		A07AE7831D852C69000CFAAC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 			children = (
 				A08A75E51D794C2D00EBDBD0 /* LoginViewController.swift */,
 				A07AE7801D84C886000CFAAC /* LoginController+handlers.swift */,
-				A07AE77B1D84B769000CFAAC /* NewMessageTableTableViewController.swift */,
+				A07AE77B1D84B769000CFAAC /* NewMessageTableViewController.swift */,
 				A08A75D41D79482800EBDBD0 /* DashboardViewController.swift */,
 			);
 			name = Controllers;
@@ -254,7 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A08A75E61D794C2D00EBDBD0 /* LoginViewController.swift in Sources */,
-				A07AE77C1D84B769000CFAAC /* NewMessageTableTableViewController.swift in Sources */,
+				A07AE77C1D84B769000CFAAC /* NewMessageTableViewController.swift in Sources */,
 				A07AE7811D84C886000CFAAC /* LoginController+handlers.swift in Sources */,
 				A08A75D51D79482800EBDBD0 /* DashboardViewController.swift in Sources */,
 				A07AE77E1D84BAA8000CFAAC /* User.swift in Sources */,

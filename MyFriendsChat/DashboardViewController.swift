@@ -39,7 +39,7 @@ class DashboardViewController: UITableViewController {
     }
     
     func hanldeNewMessage() {
-        let newMessageVC = NewMessageTableTableViewController()
+        let newMessageVC = NewMessageTableViewController()
         let navController = UINavigationController(rootViewController: newMessageVC)
         presentViewController(navController, animated: true, completion: nil)
     }

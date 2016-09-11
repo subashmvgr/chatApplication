@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class NewMessageTableTableViewController: UITableViewController {
+class NewMessageTableViewController: UITableViewController {
     var users = [User]()
     let cellId = "CellId"
     
