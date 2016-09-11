@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 
+
+
 extension LoginViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func handleLoginSignUp() {
@@ -20,7 +22,6 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
     }
     
     func handleLogin() {
-        self.setLoadingScreen()
         guard let email = emailTextField.text, password = passwordTextField.text where !password.isEmpty && !email.isEmpty  else {
             
             
@@ -35,30 +36,32 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
+        self.setLoadingScreen()
         
         FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user, error) in
             if error != nil {
-                let alertController = UIAlertController(title: "inavalid email or password", message: "Please enter valid email and password", preferredStyle: .Alert)
-                
-                let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                    self.passwordTextField.text = ""
-                    self.repeatPasswordTextField.text = ""
-                }
-                
-                alertController.addAction(OKAction)
-                
-                self.presentViewController(alertController, animated: true, completion: nil)
+                self.loadingAlert.dismissViewControllerAnimated(true, completion: {
+                    let alertController = UIAlertController(title: "invalid email or password", message: "Please enter valid email and password", preferredStyle: .Alert)
+                    
+                    let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                        self.passwordTextField.text = ""
+                        self.repeatPasswordTextField.text = ""
+                    }
+                    
+                    alertController.addAction(OKAction)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                })
                 return
             }
-            self.removeLoadingScreen()
+            self.dashBoardVC?.fetchUserAndSetTitle()
+            self.loadingAlert.dismissViewControllerAnimated(true, completion: nil)
             self.dismissViewControllerAnimated(true, completion: nil)
         })
     }
     
     func handleSignUp() {
-        self.setLoadingScreen()
         guard let email = emailTextField.text, password = passwordTextField.text, firstName = firstNameField.text, lastName = lastNameField.text  where passwordTextField.text == repeatPasswordTextField.text && !password.isEmpty && !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty  else {
-            
             
             let alertController = UIAlertController(title: "Invalid details", message: "Please enter valid name, email and password to register", preferredStyle: .Alert)
             
@@ -73,19 +76,22 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
             
             return
         }
+        self.setLoadingScreen()
         
         FIRAuth.auth()?.createUserWithEmail(email, password: password , completion: { (user: FIRUser?, error) in
             if error != nil {
-                let alertController = UIAlertController(title: "inavalid email or password", message: "Please enter valid email and password", preferredStyle: .Alert)
-                
-                let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                    self.passwordTextField.text = ""
-                    self.repeatPasswordTextField.text = ""
-                }
-                
-                alertController.addAction(OKAction)
-                
-                self.presentViewController(alertController, animated: true, completion: nil)
+                self.loadingAlert.dismissViewControllerAnimated(true, completion: {
+                    let alertController = UIAlertController(title: "inavalid email or password", message: "Please enter valid email and password", preferredStyle: .Alert)
+                    
+                    let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                        self.passwordTextField.text = ""
+                        self.repeatPasswordTextField.text = ""
+                    }
+                    
+                    alertController.addAction(OKAction)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                })
                 return
             }
             
@@ -95,9 +101,10 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
             
             //successfully authenticated user
             let imageName = NSUUID().UUIDString
-            let storageRef = FIRStorage.storage().reference().child("profileImages").child(imageName)
+            let storageRef = FIRStorage.storage().reference().child("profileImages").child("\(imageName).JPEG")
             
-            if let uploadData = UIImagePNGRepresentation(self.profileImageView.image!) {
+            
+            if let profImage = self.profileImageView.image, uploadData = UIImageJPEGRepresentation(profImage, 0.1) {
              storageRef.putData(uploadData, metadata: nil, completion: { (metaData, error) in
                 if error != nil {
                     print(error)
@@ -116,7 +123,7 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
     
     
     private func registerUserIntoDatabase(uid: String, values: [String: AnyObject]) {
-        let ref = FIRDatabase.database().referenceFromURL("https://myfriendschat-9f294.firebaseio.com/")
+        let ref = FIRDatabase.database().reference()
         let userRef = ref.child("users").child(uid)
         
         userRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
@@ -124,7 +131,11 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
                 print(err)
                 return
             }
-            self.removeLoadingScreen()
+
+            let user = User()
+            user.setValuesForKeysWithDictionary(values)
+            self.dashBoardVC?.setupNavBarFromUser(user)
+            self.loadingAlert.dismissViewControllerAnimated(true, completion: nil)
             self.dismissViewControllerAnimated(true, completion: nil)
         })
     }
@@ -191,18 +202,15 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
     }
     
     private func setLoadingScreen() {
-        view.addSubview(spinner)
-        spinner.startAnimating()
-        spinner.hidden = false
-        spinner.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        spinner.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
-        spinner.widthAnchor.constraintEqualToConstant(30).active = true
-        spinner.heightAnchor.constraintEqualToConstant(30).active = true
-    }
-    
-    private func removeLoadingScreen() {
-        spinner.stopAnimating()
-        spinner.removeFromSuperview()
+        loadingAlert = UIAlertController(title: nil, message: "Please Wait...", preferredStyle: .Alert)
+        loadingAlert.view.tintColor = UIColor.blackColor()
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        loadingIndicator.startAnimating()
+        
+        loadingAlert.view.addSubview(loadingIndicator)
+        presentViewController(loadingAlert, animated: true, completion: nil)
     }
  
 }

@@ -9,16 +9,10 @@
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
+
     
-    
-    
-    var spinner: UIActivityIndicatorView = {
-       let spin = UIActivityIndicatorView()
-        spin.backgroundColor = UIColor.greenColor()
-        spin.hidden = false
-        spin.translatesAutoresizingMaskIntoConstraints = false
-        return spin
-    }()
+    var loadingAlert: UIAlertController!
+    var dashBoardVC: DashboardViewController?
     
     var containerView: UIView = {
         let View = UIView()
@@ -199,7 +193,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         emailTextField.topAnchor.constraintEqualToAnchor(lastNameField.bottomAnchor).active = true
         emailTextField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, constant: -24).active = true
         emailHeightConstraint  = emailTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: 1/3)
-        emailHeightConstraint!.active = true
+        emailHeightConstraint?.active = true
         
         emailSeperatorView.centerXAnchor.constraintEqualToAnchor(containerView.centerXAnchor).active = true
         emailSeperatorView.topAnchor.constraintEqualToAnchor(emailTextField.bottomAnchor).active = true
