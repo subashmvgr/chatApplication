@@ -7,10 +7,18 @@
 //
 
 import UIKit
-import Firebase
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-
+    
+    
+    
+    var spinner: UIActivityIndicatorView = {
+       let spin = UIActivityIndicatorView()
+        spin.backgroundColor = UIColor.greenColor()
+        spin.hidden = false
+        spin.translatesAutoresizingMaskIntoConstraints = false
+        return spin
+    }()
     
     var containerView: UIView = {
         let View = UIView()
@@ -33,101 +41,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return btn
     }()
     
-    func handleLoginSignUp() {
-        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
-            handleLogin()
-        } else {
-            handleSignUp()
-        }
-    }
+    lazy var profileImageView: UIImageView = {
+       let imgView = UIImageView()
+        imgView.image = UIImage(named: "chatImage")
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.contentMode = .ScaleAspectFill
+        imgView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectProfileImageView)))
+        imgView.userInteractionEnabled = true
+        return imgView
+    }()
     
-    func handleLogin() {
-        guard let email = emailTextField.text, password = passwordTextField.text where !password.isEmpty && !email.isEmpty  else {
-            
-            
-            let alertController = UIAlertController(title: "Enter email/Password", message: "Please enter valid email and password to login", preferredStyle: .Alert)
-            
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                self.passwordTextField.text = ""
-            }
-            
-            alertController.addAction(OKAction)
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-            return
-        }
-        
-        FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user, error) in
-            if error != nil {
-                let alertController = UIAlertController(title: "inavalid email or password", message: "Please enter valid email and password", preferredStyle: .Alert)
-                
-                let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                    self.passwordTextField.text = ""
-                    self.repeatPasswordTextField.text = ""
-                }
-                
-                alertController.addAction(OKAction)
-                
-                self.presentViewController(alertController, animated: true, completion: nil)
-                return
-            }
-            
-            self.dismissViewControllerAnimated(true, completion: nil)
-        })
-    }
-    
-    func handleSignUp() {
-        guard let email = emailTextField.text, password = passwordTextField.text, firstName = firstNameField.text, lastName = lastNameField.text  where passwordTextField.text == repeatPasswordTextField.text && !password.isEmpty && !firstName.isEmpty && !lastName.isEmpty && !email.isEmpty  else {
-            
-            
-            let alertController = UIAlertController(title: "Invalid details", message: "Please enter valid name, email and password to register", preferredStyle: .Alert)
-            
-            let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                self.passwordTextField.text = ""
-                self.repeatPasswordTextField.text = ""
-            }
-            
-            alertController.addAction(OKAction)
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-            
-            return
-        }
-        
-        FIRAuth.auth()?.createUserWithEmail(email, password: password , completion: { (user: FIRUser?, error) in
-            if error != nil {
-                let alertController = UIAlertController(title: "inavalid email or password", message: "Please enter valid email and password", preferredStyle: .Alert)
-                
-                let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-                    self.passwordTextField.text = ""
-                    self.repeatPasswordTextField.text = ""
-                }
-                
-                alertController.addAction(OKAction)
-                
-                self.presentViewController(alertController, animated: true, completion: nil)
-                return
-            }
-            
-            guard let uid = user?.uid else {
-                return
-            }
-            
-            //successfully authenticated user
-            let ref = FIRDatabase.database().referenceFromURL("https://myfriendschat-9f294.firebaseio.com/")
-            let userRef = ref.child("users").child(uid)
-            let values = ["firstName": firstName, "lastName": lastName, "email": email ]
-            
-            userRef.updateChildValues(values, withCompletionBlock: { (err, ref) in
-                if err != nil {
-                    print(err)
-                    return
-                }
-                
-                self.dismissViewControllerAnimated(true, completion: nil)
-            })
-        })
-    }
     
     lazy var loginRegisterSegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Login", "Register"])
@@ -137,36 +60,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         sc.addTarget(self, action: #selector(handleloginRegisterChange), forControlEvents: .ValueChanged)
         return sc
     }()
-    
-    func handleloginRegisterChange() {
-        let title = loginRegisterSegmentedControl.titleForSegmentAtIndex(loginRegisterSegmentedControl.selectedSegmentIndex)
-        signUpButton.setTitle(title, forState: .Normal)
-        
-        //change height of inputcontainer
-        containerHeightConstraint?.constant = loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 100 : 150
-        
-        
-        firstNameHeightConstraint?.active = false
-        emailHeightConstraint?.active = false
-        passwordHeightConstraint?.active = false
-        passwordWidthConstraint?.active = false
-        repeastpasswordWidthConstraint?.active = false
-        
-        firstNameHeightConstraint = firstNameField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/3)
-        emailHeightConstraint = emailTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
-        passwordHeightConstraint =  passwordTextField.heightAnchor.constraintEqualToAnchor(containerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
-        passwordWidthConstraint = passwordTextField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1 : 1/2, constant: -24)
-        repeastpasswordWidthConstraint = repeatPasswordTextField.widthAnchor.constraintEqualToAnchor(containerView.widthAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 0 : 1/2, constant: -24)
-        passwordDividerView.hidden = loginRegisterSegmentedControl.selectedSegmentIndex == 0
-        
-        
-        repeastpasswordWidthConstraint?.active = true
-        passwordWidthConstraint?.active = true
-        passwordHeightConstraint?.active = true
-        emailHeightConstraint?.active = true
-        firstNameHeightConstraint?.active = true
-    }
-    
     
     var firstNameField: UITextField = {
         let tf = UITextField()
@@ -238,10 +131,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
         view.backgroundColor = UIColor(r: 90, g: 90, b: 90)
         
+        view.addSubview(profileImageView)
         view.addSubview(loginRegisterSegmentedControl)
         view.addSubview(containerView)
         view.addSubview(signUpButton)
         
+        setupProfileImageView()
         setupLoginRegisterSegementedControl()
         setupContainerView()
         setupSignUpButton()
@@ -253,6 +148,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var passwordHeightConstraint: NSLayoutConstraint?
     var passwordWidthConstraint: NSLayoutConstraint?
     var repeastpasswordWidthConstraint: NSLayoutConstraint?
+    
+    
+    func setupProfileImageView() {
+        profileImageView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        profileImageView.bottomAnchor.constraintEqualToAnchor(loginRegisterSegmentedControl.topAnchor, constant: -12).active = true
+        profileImageView.widthAnchor.constraintEqualToConstant(100).active = true
+        profileImageView.heightAnchor.constraintEqualToConstant(130).active = true
+    }
     
     func setupContainerView() {
         containerView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
@@ -321,7 +224,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordDividerView.widthAnchor.constraintEqualToConstant(1).active = true
         passwordDividerView.heightAnchor.constraintEqualToAnchor(repeatPasswordTextField.heightAnchor).active = true
     }
-    
     
     func setupLoginRegisterSegementedControl() {
         loginRegisterSegmentedControl.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
