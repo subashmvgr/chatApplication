@@ -381,6 +381,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAA8B1F337FF0C6CDD2DD98181A3C629 /* Pods-MyFriendsChat.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -404,6 +405,7 @@
 				PRODUCT_NAME = Pods_MyFriendsChat;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -494,6 +496,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0DD9341E19C2565509C248D8738166B9 /* Pods-MyFriendsChat.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
