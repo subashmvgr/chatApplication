@@ -159,7 +159,7 @@ class  ChatViewController: UICollectionViewController, UITextFieldDelegate, UICo
     func keyboardDidShow(notification: NSNotification) {
         if messages.count > 0 {
             let indexPath = NSIndexPath(forRow: messages.count - 1, inSection: 0)
-            self.collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+            self.collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
         }
     }
     
