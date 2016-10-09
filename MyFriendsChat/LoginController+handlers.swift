@@ -181,7 +181,7 @@ extension LoginViewController: UIImagePickerControllerDelegate, UINavigationCont
     
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        print(info)
+        
         var selectedImageFromPicker: UIImage?
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
             selectedImageFromPicker = editedImage

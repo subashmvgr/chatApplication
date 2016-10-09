@@ -21,30 +21,57 @@ class DashboardViewController: UITableViewController {
         tableView.registerClass(UserCell.self, forCellReuseIdentifier: cellId)
         
         securityCheck()
-        observeMessages()
     }
     
-    func observeMessages() {
-        let ref = FIRDatabase.database().reference().child("messages")
+    
+    func observeUserMessages() {
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else { return }
+        
+        let ref = FIRDatabase.database().reference().child("user-messages").child(uid)
         ref.observeEventType(.ChildAdded, withBlock: { (snapshot) in
+            
+            let userID = snapshot.key
+            
+            let deeperRef = ref.child(userID)
+            
+            deeperRef.observeEventType(.ChildAdded, withBlock: { (snapshot) in
+                let msgID = snapshot.key
+                self.fetchMessageForMessageID(msgID)
+                }, withCancelBlock: nil)
+            }, withCancelBlock: nil)
+    }
+    
+    
+    var timer: NSTimer?
+
+    private func fetchMessageForMessageID(msgID: String) {
+        let msgRef = FIRDatabase.database().reference().child("messages").child(msgID)
+        msgRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             if let dict = snapshot.value as? [String : AnyObject] {
-                let message = Message()
-                message.setValuesForKeysWithDictionary(dict)
-               // self.messages.append(message)
+                let message = Message(dictionary: dict)
                 
-                if let toId = message.toId {
-                    self.messagesDictionary[toId] = message
-                    self.messages = Array(self.messagesDictionary.values)
-                    self.messages.sortInPlace({ (msg1, msg2) -> Bool in
-                        return msg1.timestamp?.intValue > msg2.timestamp?.intValue
-                    })
+                if let chatPartnerID = message.chatPartnerID() {
+                    self.messagesDictionary[chatPartnerID] = message
                 }
-                
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.tableView.reloadData()
-                })
+                self.attemptReloadTable()
             }
             }, withCancelBlock: nil)
+    }
+    
+    private func attemptReloadTable() {
+        self.timer?.invalidate()
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: #selector(self.handleReloadTableView), userInfo: nil, repeats: false)
+    }
+    
+    func handleReloadTableView() {
+        self.messages = Array(self.messagesDictionary.values)
+        self.messages.sortInPlace({ (msg1, msg2) -> Bool in
+            return msg1.timestamp?.intValue > msg2.timestamp?.intValue
+        })
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+        })
     }
     
     func securityCheck() {
@@ -71,7 +98,11 @@ class DashboardViewController: UITableViewController {
     }
     
     func setupNavBarFromUser(user: User) {
+        messages.removeAll()
+        messagesDictionary.removeAll()
+        tableView.reloadData()
         
+        observeUserMessages()
         let titleView = UIView()
         titleView.frame = CGRectMake(0, 0, 100, 40)
         
@@ -162,6 +193,19 @@ class DashboardViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-       // showChatViewForUser()
+        let message = messages[indexPath.row]
+        
+        guard let chatPartnerID = message.chatPartnerID() else { return }
+        
+        let ref = FIRDatabase.database().reference().child("users").child(chatPartnerID)
+        ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            guard let dict = snapshot.value as? [String : AnyObject] else { return }
+            
+            let user = User()
+            user.id = chatPartnerID
+            user.setValuesForKeysWithDictionary(dict)
+            
+            self.showChatViewForUser(user)
+            }, withCancelBlock: nil)
     }
 }

@@ -29,12 +29,24 @@ class NewMessageTableViewController: UITableViewController {
                 user.id = snapshot.key
                 user.setValuesForKeysWithDictionary(dict)
                 self.users.append(user)
-                //this will crash because of background thread, so lets use dispatch_async to fix
-               dispatch_async(dispatch_get_main_queue(), {
-                self.tableView.reloadData()
-               })
+                
+                self.timer?.invalidate()
+                print("cancelled reload")
+                self.timer = NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: #selector(self.handleReloadTableView), userInfo: nil, repeats: false)
+                print("scheduled reload")
             }
             }, withCancelBlock: nil)
+    }
+    
+    var timer: NSTimer?
+    
+    
+    func handleReloadTableView() {
+        //this will crash because of background thread, so lets use dispatch_async to fix
+        dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+            print("we reloaded table")
+        })
     }
     
     func handleCancel() {
@@ -55,6 +67,7 @@ class NewMessageTableViewController: UITableViewController {
         if let profileImageUrl = user.profileImageUrl {
           cell.profileImageView.loadImageUsingCache(profileImageUrl)
         }
+        cell.timeLabel.hidden = true
         return cell
     }
     

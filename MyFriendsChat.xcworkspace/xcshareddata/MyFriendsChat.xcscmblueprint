@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "59116A7E48DFF883752C5075DFD35B5F22E46A4F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2F560931E10647CA0F969DF0553AD6B2F1881EB4" : 0,
+    "59116A7E48DFF883752C5075DFD35B5F22E46A4F" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F2D38E25-909F-46A8-AE8F-6CE147F38D7D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2F560931E10647CA0F969DF0553AD6B2F1881EB4" : "",
+    "59116A7E48DFF883752C5075DFD35B5F22E46A4F" : "MyFriendsChat\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MyFriendsChat",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MyFriendsChat.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/gitlab.corp.apple.com\/geniusapp\/lithgowapp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2F560931E10647CA0F969DF0553AD6B2F1881EB4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/subashmvgr\/chatApplication.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "59116A7E48DFF883752C5075DFD35B5F22E46A4F"
+    }
+  ]
+}
